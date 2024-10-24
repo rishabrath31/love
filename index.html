@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Do You Love Me?</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Keyframe animation for the main text */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Keyframe animation for popping up buttons */
+      @keyframes popUp {
+        0% {
+          transform: scale(0);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Styling for the main container */
+      .main-container {
+        text-align: center;
+        margin-top: 100px;
+      }
+
+      /* Styling for the question text */
+      .question {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #333;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      /* Styling for buttons */
+      .btn-options {
+        margin-top: 30px;
+        animation: popUp 1s ease-in-out;
+      }
+
+      /* Styling for confirmation text */
+      .sure-text {
+        font-size: 1.5rem;
+        color: red;
+        margin-top: 20px;
+        display: none; /* Hidden initially */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Main question text -->
+      <p class="question">Do You Love Me?</p>
+
+      <!-- Button options with Yes and No -->
+      <div class="btn-options">
+        <button id="yesBtn" class="btn btn-success btn-lg mx-2">Yes</button>
+        <button id="noBtn" class="btn btn-danger btn-lg mx-2">No</button>
+      </div>
+
+      <!-- Text that appears when No is selected -->
+      <p id="sureText" class="sure-text">Are you sure?</p>
+      <div id="confirmationOptions" class="btn-options" style="display: none">
+        <button id="confirmYesBtn" class="btn btn-success btn-lg mx-2">
+          Yes
+        </button>
+        <button id="confirmNoBtn" class="btn btn-danger btn-lg mx-2">No</button>
+      </div>
+    </div>
+
+    <!-- Script to handle button click logic -->
+    <script>
+      // Variables to keep track of questions
+      let confirmationCount = 0;
+
+      // Handle No button click to show 'Are you sure?' text
+      document.getElementById("noBtn").addEventListener("click", function () {
+        document.getElementById("sureText").style.display = "block";
+        document.getElementById("confirmationOptions").style.display = "block";
+      });
+
+      // Handle Yes button click from the first question
+      document.getElementById("yesBtn").addEventListener("click", function () {
+        alert("I'm glad to hear that!");
+      });
+
+      // Handle Yes button click for the confirmation
+      document
+        .getElementById("confirmYesBtn")
+        .addEventListener("click", function () {
+          confirmationCount++;
+          let additionalQuestions = [
+            "Are you really really sure?",
+            "Just checking, are you positive?",
+            "Last chance, do you truly feel that way?",
+            "I need to know, are you absolutely certain?",
+            "No going back now, are you really sure?",
+            "Think carefully... do you want to change your mind?",
+            "Are you absolutely convinced?",
+            "Do you want to rethink your answer?",
+            "Let's be sure, are you still certain?",
+            "Do you feel the same way right now?",
+          ];
+
+          // Cycle through additional questions
+          if (confirmationCount < additionalQuestions.length) {
+            document.getElementById("sureText").textContent =
+              additionalQuestions[confirmationCount];
+          } else {
+            document.getElementById("sureText").textContent =
+              "You're persistent! Are you sure?";
+          }
+        });
+
+      // Handle No button click for the confirmation
+      document
+        .getElementById("confirmNoBtn")
+        .addEventListener("click", function () {
+          document.getElementById("sureText").style.display = "none";
+          document.getElementById("confirmationOptions").style.display = "none";
+        });
+    </script>
+
+    <!-- Bootstrap JS for functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
